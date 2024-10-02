@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+    <link rel="stylesheet" href="task.css">
+    <link rel="stylesheet" href="tap.css">
+    <!-- Include Swiper's CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="task-container">
+            <div class="task-header">
+                <img src="star.png" alt="Star Logo" class="star-logo">
+                <h2>See the tasks available</h2>
+                <p>We’ll reward you immediately with points after each task completion.</p>
+            </div>
+
+            <!-- Swiper Slider container for touch interaction -->
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <!-- Each task will be a swiper slide -->
+                    <div class="swiper-slide">
+                        <div class="task-item" onclick="handleTaskClick('t.me/star_coin_master', this)">
+                            <div class="task-info">
+                                <img src="telegram.png" alt="X Logo" class="task-icon">
+                                <div class="task-description">
+                                    <p>Join Star Coummunity</p>
+                                    <span>+ 100 str</span>
+                                </div>
+                            </div>
+                            <button class="claim-button" style="display: none;" onclick="claimPoints(event, this, 90)">Claim</button>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="task-item" onclick="handleTaskClick('https://t.me/star_coin_master1', this)">
+                            <div class="task-info">
+                                <img src="telegram.png" alt="Telegram Logo" class="task-icon">
+                                <div class="task-description">
+                                    <p>Join Star Coin News</p>
+                                    <span>+ 100 str</span>
+                                </div>
+                            </div>
+                            <button class="claim-button" style="display: none;" onclick="claimPoints(event, this, 90)">Claim</button>
+                        </div>
+                    </div>
+
+                    <!-- Add more task slides as needed -->
+                </div>
+            </div>
+
+            <!-- Non-slider tasks -->
+            <div class="non-slider-tasks">
+                <div class="non-slider-task" onclick="handleTaskClick('https://t.me/blum/app?startapp=ref_8vhUHveoeQ', this)">
+                    <div class="task-info">
+                        <img src="blum.png" alt="Instagram Logo" class="task-icon">
+                        <div class="task-description">
+                            <p>Play Blum</p>
+                            <span>+ 100 str</span>
+                        </div>
+                    </div>
+                    <button class="claim-button" style="display: none;" onclick="claimPoints(event, this, 50)">Claim</button>
+                </div>
+
+                <div class="non-slider-task" onclick="handleTaskClick('https://t.me/star_coin_master_bot', this)">
+                    <div class="task-info">
+                        <img src="friend.png" alt="Friend Logo" class="task-icon">
+                        <div class="task-description">
+                            <p>Invite a friend to Star</p>
+                            <span>+ 100 str</span>
+                        </div>
+                    </div>
+                    <button class="claim-button" style="display: none;" onclick="claimPoints(event, this, 100)">Claim</button>
+                </div>
+
+                <div class="non-slider-task" onclick="handleTaskClick('https://t.me/major/start?startapp=6850021970', this)">
+                    <div class="task-info">
+                        <img src="major.png" alt="App Store Logo" class="task-icon">
+                        <div class="task-description">
+                            <p>Play Major</p>
+                            <span>+ 100 str</span>
+                        </div>
+                    </div>
+                    <button class="claim-button" style="display: none;" onclick="claimPoints(event, this, 30)">Claim</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu section -->
+        <div class="menu-container">
+            <div class="round-box"></div>
+            <div class="menu">
+                <a href="index.html"><img src="tap.png" alt="Tap" class="menu-icon"></a>
+                <a href="friend.html"><img src="friend.png" alt="Friend" class="menu-icon"></a>
+                <a href="task.html"><img src="task.png" alt="Task" class="menu-icon"></a>
+                <a href="withdraw.html"><img src="withdraw.png" alt="Withdraw" class="menu-icon"></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper with touch gestures -->
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            direction: 'horizontal',
+            loop: true, // Enables infinite looping of tasks
+            slidesPerView: 1, // Show one task at a time
+            spaceBetween: 30, // Space between slides
+            autoplay: {
+                delay: 3000, // Auto-slide every 3 seconds
+                disableOnInteraction: false, // Don't stop autoplay when swiped
+            },
+            touchEventsTarget: 'container', // Enable touch-based sliding
+            grabCursor: true, // Shows grab cursor when hovered on desktop
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+
+        function handleTaskClick(url, taskElement) {
+            // Open the URL in a new tab
+            window.open(url, '_blank');
+
+            // Show the claim button
+            const claimButton = taskElement.querySelector('.claim-button');
+            claimButton.style.display = 'inline-block';
+        }
+
+        function claimPoints(event, button, points) {
+            // Prevent the default action of the button
+            event.stopPropagation(); // Prevent click event bubbling to task item
+
+            // Check if the button is already claimed
+            if (button.textContent === "Claimed") return;
+
+            // Update the user's points in local storage
+            let userPoints = parseInt(localStorage.getItem('userPoints')) || 0;
+            userPoints += points; // Add the points for this task
+            localStorage.setItem('userPoints', userPoints);
+
+            // Change button to claimed state
+            button.textContent = "Claimed";
+            button.style.backgroundColor = "gray";
+            button.style.pointerEvents = "none"; // Disable further clicks
+        }
+    </script>
+</body>
+</html>

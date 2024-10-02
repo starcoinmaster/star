@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invite Friends</title>
+    <link rel="stylesheet" href="friend.css">
+    <link rel="stylesheet" href="tap.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="invite-container">
+            <div class="invite-header">
+                <h2>Invite Frens</h2>
+                <p>☆ 0</p>
+                <button class="claim-button">Claim</button>
+            </div>
+
+            <!-- Transparent box with light color message -->
+            <div class="transparent-box">
+                <p>Invite friends to claim your referral rewards</p>
+            </div>
+
+            <!-- Input for copying user link -->
+            <input type="text" id="userLink" value="https://yourwebsite.com?ref=yourusername" readonly>
+            <button id="copyLinkButton" class="claim-button">Invite Friends</button>
+
+            <!-- List of invited friends -->
+            <div class="friends-list" id="friendsList"></div>
+        </div>
+
+        <!-- Menu section -->
+        <div class="menu-container">
+            <div class="round-box"></div>
+            <div class="menu">
+                <a href="index.html"><img src="tap.png" alt="Tap" class="menu-icon"></a>
+                <a href="friend.html"><img src="friend.png" alt="Friend" class="menu-icon"></a>
+                <a href="task.html"><img src="task.png" alt="Task" class="menu-icon"></a>
+                <a href="withdraw.html"><img src="withdraw.png" alt="Withdraw" class="menu-icon"></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to copy the user link to clipboard
+        document.getElementById("copyLinkButton").addEventListener("click", function() {
+            const link = document.getElementById("userLink");
+            link.select();
+            document.execCommand("copy");
+            alert("Link copied: " + link.value);
+        });
+
+        // Function to simulate inviting a friend
+        function inviteFriend(username) {
+            const friendsList = document.getElementById("friendsList");
+            const friendItem = document.createElement("p");
+            friendItem.textContent = username; // Display the username of the invited friend
+            friendsList.appendChild(friendItem);
+        }
+
+        // Example usage (this would be replaced with actual logic to handle invites)
+        inviteFriend("exampleFriend1");
+        inviteFriend("exampleFriend2");
+    </script>
+</body>
+</html>
