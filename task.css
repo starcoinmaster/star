@@ -50,7 +50,7 @@ h2 {
 
 p {
     font-size: 14px;
-    color: #888;
+    color: #ffffff;
     margin-top: 0;
 }
 
@@ -67,7 +67,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1f1f1f;
+    background-color:rgb(64, 133, 160);
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 15px;
@@ -78,7 +78,7 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1f1f1f;
+    background-color: rgb(32, 55, 65);
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 15px;
@@ -108,7 +108,7 @@ p {
 
 .task-description span {
     font-size: 12px;
-    color: #888;
+    color: #ccc2d6;
 }
 
 .claim-button {
