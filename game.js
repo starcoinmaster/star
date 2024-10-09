@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const startButton = document.getElementById('startButton');
     const timerDisplay = document.getElementById('timer');
     const scoreDisplay = document.getElementById('score');
-    let score = 0;
+    let score = 0; // Reset game score to 0 at start
     let timeLeft = 30; // Time reduced to 30 seconds
     let gameInterval;
     let coinVanishTimeout;
@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function placeCoins() {
         for (let i = 0; i < 5; i++) { // Place 5 coins
             const coin = document.createElement('div');
-            // Randomly decide whether this is a small or big coin
             const isSmallCoin = Math.random() > 0.5;
 
             if (isSmallCoin) {
@@ -29,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             gameContainer.appendChild(coin);
 
-            // Add click event to the coin
             coin.addEventListener('click', () => {
                 if (coin.classList.contains('small-coin')) {
                     score += 1; // Small coin gives 1 point
@@ -57,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
         timerDisplay.textContent = `Time: ${timeLeft}`;
         startButton.style.display = 'none'; // Hide the start button
 
-        // Start the countdown timer
         const timerInterval = setInterval(() => {
             timeLeft--;
             timerDisplay.textContent = `Time: ${timeLeft}`;
@@ -67,15 +64,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 clearInterval(gameInterval);
                 clearTimeout(coinVanishTimeout);
                 startButton.style.display = 'block'; // Show the start button again
+
+                // Add the score to the user's total coin count in localStorage
+                let totalCoins = parseInt(localStorage.getItem('coinCount')) || 0;
+                totalCoins += score; // Add game score to total coins
+                localStorage.setItem('coinCount', totalCoins); // Update local storage
             }
         }, 1000);
 
-        // Place coins every second
         gameInterval = setInterval(() => {
             placeCoins();
         }, 1000);
     }
 
-    // Add event listener to the start button
     startButton.addEventListener('click', startGame);
 });
