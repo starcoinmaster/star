@@ -1,4 +1,4 @@
-let coinCount = parseInt(localStorage.getItem('coinCount')) || 0; // Load from local storage
+let coinCount = parseInt(localStorage.getItem('coinCount')) || 0; // Load total coins from local storage
 let isFarming = false; // Farming state
 let countdownInterval; // Variable for countdown interval
 
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let storedNickname = localStorage.getItem('nickname');
 
     if (storedNickname) {
-        userInfoElement.innerText = `user name: hello, ${storedNickname}`;
+        userInfoElement.innerText = `Hello, ${storedNickname}`; // Display the stored nickname
     } else {
         // Show the modal if no nickname is stored
         nicknameModal.style.display = 'flex';
@@ -35,6 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Please enter a valid nickname");
         }
     });
+
+    // Update coin count display with the total coins
+    coinCountDisplay.innerText = coinCount; // Show total coin count
 });
 
 // Farming button logic
@@ -77,9 +80,9 @@ function drainWater() {
 
 function claimCoins() {
     if (timeText.innerText === "Claim Coins") {
-        coinCount += 60; // Add 60 coins
+        coinCount += 60; // Add 60 coins from farming
         coinCountDisplay.innerText = coinCount; // Update coin display
-        localStorage.setItem('coinCount', coinCount); // Save to local storage
+        localStorage.setItem('coinCount', coinCount); // Save total coins to local storage
         resetFarming();
     }
 }
